@@ -96,10 +96,13 @@ const LandingPage = () => {
     animate();
 
     return () => {
-      // Clean up on component unmount
+      controls.dispose(); // Dispose of OrbitControls
       renderer.dispose();
-      mountRef.current.removeChild(renderer.domElement);
+      if (mountRef.current) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
     };
+    
   }, []);
 
   return <div ref={mountRef} style={{ width: '100vw', height: '100vh' }} />;
